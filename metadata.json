@@ -1,0 +1,5 @@
+{
+  "name": "중학 자막 교정 도우미",
+  "description": "An AI-powered application to load an SRT subtitle file, identify potential typos or contextually awkward words, and guide the user through a step-by-step correction process.",
+  "requestFramePermissions": []
+}
