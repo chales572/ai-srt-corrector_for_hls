@@ -1,12 +1,12 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { PotentialError } from '../types';
 
-export async function findErrorsInSrt(srtContent: string): Promise<PotentialError[]> {
-  if (!process.env.API_KEY) {
-    throw new Error("API_KEY environment variable not set");
+export async function findErrorsInSrt(srtContent: string, apiKey: string): Promise<PotentialError[]> {
+  if (!apiKey || apiKey.trim() === '') {
+    throw new Error("API 키가 제공되지 않았습니다.");
   }
 
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey: apiKey });
 
   const prompt = `
     다음 SRT 자막 내용을 분석해 주세요. 당신의 임무는 다음과 같은 특정 유형의 오류만 식별하는 것입니다:
