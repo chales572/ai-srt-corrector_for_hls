@@ -146,11 +146,14 @@ const App: React.FC = () => {
 
 
   const deriveSrtUrl = (hlsUrl: string): string => {
-    // http://hlsmedia.wjthinkbig.com/hlsmedia/_definst_/smil:hlsmedia/BOOKCLUB/SMARTALL-MID/KORN/DTOP/APROACDY/1111/25280/VOD/VOD_64780.SMIL/playlist.m3u8
-    // http://down.wjthinkbig.com/BOOKCLUB/SMARTALL-MID/KORN/DTOP/APROACDY/1111/25280/VOD/VOD_64780.SRT
+    // https://hlsmedia.wjthinkbig.com/hlsmedia/_definst_/smil:hlsmedia/BOOKCLUB/SMARTALL-MID/KORN/DTOP/APROACDY/1111/25280/VOD/VOD_64780.SMIL/playlist.m3u8
+    // https://down.wjthinkbig.com/BOOKCLUB/SMARTALL-MID/KORN/DTOP/APROACDY/1111/25280/VOD/VOD_64780.SRT
 
     // Direct URL replacement for static deployment (CORS enabled on source)
-    let srtUrl = hlsUrl.replace('http://hlsmedia.wjthinkbig.com/hlsmedia/_definst_/smil:hlsmedia/', 'http://down.wjthinkbig.com/');
+    // Ensure we use HTTPS to avoid Mixed Content errors
+    let srtUrl = hlsUrl.replace('https://hlsmedia.wjthinkbig.com/hlsmedia/_definst_/smil:hlsmedia/', 'https://down.wjthinkbig.com/');
+    // Also handle http input just in case
+    srtUrl = srtUrl.replace('http://hlsmedia.wjthinkbig.com/hlsmedia/_definst_/smil:hlsmedia/', 'https://down.wjthinkbig.com/');
 
     // Replace .SMIL/playlist.m3u8 or just /playlist.m3u8 with .SRT
     // Case insensitive replacement to be safe
@@ -264,7 +267,8 @@ const App: React.FC = () => {
           const filePath = row.FILE_PATH;
           const fileName = row.FILE_NAME;
           // Construct URL based on user requirement
-          const fullUrl = `http://hlsmedia.wjthinkbig.com/hlsmedia/_definst_/smil:hlsmedia/${filePath}${fileName}/playlist.m3u8`;
+          // Use HTTPS to avoid Mixed Content errors
+          const fullUrl = `https://hlsmedia.wjthinkbig.com/hlsmedia/_definst_/smil:hlsmedia/${filePath}${fileName}/playlist.m3u8`;
 
           return {
             FILE_PATH: row.FILE_PATH,
