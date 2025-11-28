@@ -6,14 +6,20 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "start": "node server.js",
     "preview": "vite preview",
     "deploy": "bash deploy.sh",
     "deploy:win": "powershell -ExecutionPolicy Bypass -File deploy.ps1"
   },
   "dependencies": {
+    "@google/genai": "^1.29.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "hls.js": "^1.6.15",
+    "http-proxy-middleware": "^3.0.5",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "@google/genai": "^1.29.0"
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
